@@ -24,6 +24,8 @@ import time
 
 from gi.repository import Gtk, Gdk
 
+from sugar3.graphics import style
+from sugar3.graphics.palette import Palette
 from sugar3.graphics.toolbutton import ToolButton
 from sugar3.graphics.toggletoolbutton import ToggleToolButton
 from sugar3.graphics.toolcombobox import ToolComboBox
@@ -39,6 +41,11 @@ except:
 from fontcombobox import FontComboBox
 from fontcombobox import FontSize
 import globos
+
+
+DEFAULT_TIME = 10
+MIN_TIME = 1
+MAX_TIME = 60
 
 
 ##Class to manage the Text Color
@@ -142,12 +149,44 @@ class GlobesManager():
         self.b_borrar.show()
         edit_toolbar.insert(self.b_borrar, -1)
 
+        time_button = ToolButton('stopwatch')
+        time_button.set_tooltip(_('Set Image Duration in Slideshow (Seconds)'))
+        edit_toolbar.insert(time_button, -1)
+        time_button.show()
+
+        self._time_spin = Gtk.SpinButton.new_with_range(MIN_TIME, MAX_TIME, 1)
+        self._time_spin.connect('value-changed', self.__time_spin_changed_cb)
+        self._time_spin.props.value = DEFAULT_TIME
+        self._time_spin.props.update_policy = \
+            Gtk.SpinButtonUpdatePolicy.IF_VALID
+
+        palette = time_button.get_palette()
+        palette.connect('popup', self.__time_button_popup_cb)
+        time_button.connect('clicked', lambda *args:
+            palette.popup(immediate=True, state=Palette.SECONDARY))
+
+        alignment = Gtk.Alignment()
+        alignment.set_padding(style.DEFAULT_PADDING, style.DEFAULT_PADDING,
+                              style.DEFAULT_PADDING, style.DEFAULT_PADDING)
+        alignment.add(self._time_spin)
+        self._time_spin.show()
+        palette.set_content(alignment)
+        alignment.show()
+
     def set_buttons_sensitive(self, sensitive):
         self._globes_menu.set_sensitive(sensitive)
         self.add_photo.set_sensitive(sensitive)
         self.b_borrar.set_sensitive(sensitive)
         self.b_girar.set_sensitive(sensitive)
         self._lines_menu.set_sensitive(sensitive)
+
+    def __time_button_popup_cb(self, palette):
+        self._time_spin.props.value = \
+            self._page.get_active_box().slideshow_duration
+
+    def __time_spin_changed_cb(self, button):
+        self._page.get_active_box().slideshow_duration = \
+            self._time_spin.props.value
 
     def __activate_add_line_cb(self, widget, image_name):
         active_box = self._page.get_active_box()

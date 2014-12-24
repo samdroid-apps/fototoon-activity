@@ -25,6 +25,7 @@ from sugar3.graphics.icon import Icon
 
 import globos
 import persistencia
+from toolbar import DEFAULT_TIME
 from toolbar import TextToolbar
 from toolbar import GlobesManager
 from slideview import SlideView
@@ -526,6 +527,7 @@ class ComicBox(Gtk.EventBox):
         self.image_saved = False
         self.title_globe = None
         self.thumbnail = None
+        self.slideshow_duration = DEFAULT_TIME
 
         self.width = (int)(SCREEN_WIDTH - DEF_SPACING) / 2
         self.height = BOX_HEIGHT
