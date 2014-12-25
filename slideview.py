@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2012 Agustin Zubiaga <aguz@sugarlabs.org>
-
+# Copyright (C) 2014 Sam Parkinson <sam@sugarlabs.org>
+#
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
@@ -19,6 +20,8 @@
 
 
 from gi.repository import Gtk
+from gi.repository import GObject
+
 from sugar3.graphics import style
 from sugar3.graphics.icon import Icon
 
@@ -33,6 +36,7 @@ class SlideView(Gtk.EventBox):
 
         self._boxes = []
         self._current_box = None
+        self._timeout_id = None
 
         prev_btn = Gtk.EventBox()
         prev_btn.connect('button-press-event', self._prev_slide)
@@ -88,6 +92,37 @@ class SlideView(Gtk.EventBox):
     def set_current_box(self, box):
         self._current_box = box
         self._area.queue_draw()
+
+    def start(self, use_timings):
+        if not use_timings:
+            self._prev_icon.show()
+            self._next_icon.show()
+            return
+
+        self._prev_icon.hide()
+        self._next_icon.hide()
+
+        box = self._boxes[self._current_box]
+        duration = box.slideshow_duration
+        self._timeout_id = \
+            GObject.timeout_add_seconds(duration, self.__slideshow_timeout_cb)
+
+    def stop(self):
+        if self._timeout_id:
+            GObject.source_remove(self._timeout_id)
+
+    def __slideshow_timeout_cb(self, *args):
+        if self._current_box + 1 > len(self._boxes) - 1:
+            return False
+
+        self._current_box += 1
+        self._area.queue_draw()
+
+        box = self._boxes[self._current_box]
+        duration = box.slideshow_duration
+        self._timeout_id = \
+            GObject.timeout_add_seconds(duration, self.__slideshow_timeout_cb)
+        return False
 
     def _next_slide(self, widget, event):
         self._current_box += 1

@@ -1,0 +1,34 @@
+<?xml version="1.0" ?><!-- Created with Inkscape (http://www.inkscape.org/) --><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd' [
+	<!ENTITY stroke_color "#666666">
+	<!ENTITY fill_color "#ffffff">
+]><svg height="55" id="svg2" style="fill:&fill_color;;stroke:&stroke_color;;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round" version="1.1" viewBox="0 0 55 55" width="55" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg"><metadata id="metadata14">
+  <rdf:RDF>
+    <cc:Work rdf:about="">
+      <dc:format>image/svgxml</dc:format>
+      <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+      <dc:title/>
+    </cc:Work>
+  </rdf:RDF>
+</metadata>
+<defs id="defs12"/>
+
+
+`  <g id="g3041" style="stroke:#ffffff" transform="matrix(0.8501594,0,0,0.8501594,4.1206165,2.9055499)">
+  <rect height="30" id="rect2996" style="fill:none;stroke:&fill_color;;stroke-width:2.34500003;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" width="40" x="7.5" y="5.8274999"/>
+  <g id="g3793" style="fill:none;stroke:&fill_color;;stroke-opacity:1" transform="translate(-1.0846148,0)">
+    <line id="line2460" style="fill:none;stroke:&fill_color;;stroke-width:1.78056884;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" x1="27.69433" x2="23.419287" y1="36.358479" y2="52.31316"/>
+    <line id="line2460-2" style="fill:none;stroke:&fill_color;;stroke-width:1.78056884;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" x1="29.474899" x2="33.749943" y1="36.358479" y2="52.313156"/>
+  </g>
+  <line id="line2460-0" style="fill:none;stroke:&fill_color;;stroke-width:2.66399026;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" x1="9.0131855" x2="45.986813" y1="8.168005" y2="8.168005"/>
+  <g id="g4291" transform="matrix(0.63521467,0,0,0.63521467,22.026419,17.47312)">
+    <circle cx="29.287001" cy="37.791" id="circle4293" r="19.902" style="fill:&stroke_color;stroke:&fill_color;;stroke-width:4;stroke-miterlimit:10" transform="matrix(1.2815657,0,0,1.2815657,-10.169197,-7.542746)"/>
+    <g id="g4295" transform="matrix(1.2815657,0,0,1.2815657,-10.169197,-7.542746)">
+      <path d="m 35.036,9.803 c 0,1.344 -1.102,2.441 -2.44,2.441 h -6.61 c -1.345,0 -2.442,-1.099 -2.442,-2.441 V 2.827 c 0,-1.345 1.1,-2.441 2.442,-2.441 h 6.61 c 1.344,0 2.44,1.1 2.44,2.441 v 6.976 z" id="path4297" style="fill:&stroke_color;stroke:&fill_color;;stroke-width:4"/>
+    </g>
+    <g id="g4299" transform="matrix(1.2815657,0,0,1.2815657,-10.169197,-7.542746)">
+      <path d="m 49.332,18.721 c -0.75,0.75 -1.979,0.75 -2.729,0 l -1.76,-1.758 c -0.75,-0.75 -0.75,-1.979 0,-2.729 l 2.499,-2.498 c 0.75,-0.75 1.979,-0.75 2.729,0 l 1.76,1.761 c 0.75,0.75 0.75,1.977 0,2.727 l -2.499,2.497 z" id="path4301" style="fill:&stroke_color;stroke:&fill_color;;stroke-width:4"/>
+    </g>
+    <path d="M 28.586631,43.946718 C 26.93213,44.825873 24.881624,44.197906 23.999907,42.544685 23.119471,40.891466 23.74872,38.837116 25.403221,37.95668 L 41.747029,32.82401 28.586631,43.946718 z" id="path4303" style="fill:&fill_color;;stroke:none"/>
+  </g>
+</g>
+</svg>

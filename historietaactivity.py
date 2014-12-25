@@ -65,8 +65,16 @@ class HistorietaActivity(activity.Activity):
         slideview_btn = ToggleToolButton('slideshow')
         slideview_btn.set_tooltip(_('Slideshow'))
         slideview_btn.set_active(False)
+        slideview_btn.connect('clicked', self._switch_view_mode, False)
         view_toolbar.insert(slideview_btn, -1)
         slideview_btn.show()
+
+        slideview_timings_btn = ToggleToolButton('slideshow-stopwatch')
+        slideview_timings_btn.set_tooltip(_('Slideshow with Timings'))
+        slideview_timings_btn.set_active(False)
+        slideview_timings_btn.connect('clicked', self._switch_view_mode, True)
+        view_toolbar.insert(slideview_timings_btn, -1)
+        slideview_timings_btn.show()
 
         fullscreen_btn = ToolButton('view-fullscreen')
         fullscreen_btn.set_tooltip(_('Fullscreen'))
@@ -84,12 +92,11 @@ class HistorietaActivity(activity.Activity):
         self.globes_manager = GlobesManager(toolbar, edit_toolbar, self)
 
         # fonts
-        text_button = ToolbarButton()
-        text_button.props.page = TextToolbar(self.page)
-        text_button.props.icon_name = 'format-text-size'
-        text_button.props.label = _('Text')
-        slideview_btn.connect('clicked', self._switch_view_mode, text_button)
-        toolbar_box.toolbar.insert(text_button, -1)
+        self._text_button = ToolbarButton()
+        self._text_button.props.page = TextToolbar(self.page)
+        self._text_button.props.icon_name = 'format-text-size'
+        self._text_button.props.label = _('Text')
+        self._toolbar_box.toolbar.insert(self._text_button, -1)
 
         reorder_img_btn = ToolButton('thumbs-view')
         reorder_img_btn.set_icon_name('thumbs-view')
@@ -384,11 +391,13 @@ class HistorietaActivity(activity.Activity):
         succes, preview_data = pixbuf2.save_to_bufferv('png', [], [])
         return dbus.ByteArray(preview_data)
 
-    def _switch_view_mode(self, widget, textbutton):
+    def _switch_view_mode(self, widget, use_timings):
         if widget.get_active():
             self._notebook.set_current_page(1)
+            self._slideview.stop()
             self._slideview.set_boxes(self.page.boxs)
             self._slideview.set_current_box(0)
+            self._slideview.start(use_timings)
             #disable edition mode in the globes
             for box in self.page.boxs:
                 box.set_globo_activo(None)
@@ -396,11 +405,12 @@ class HistorietaActivity(activity.Activity):
             self._key_press_signal_id = self.connect(
                 'key_press_event', self._slideview.key_press_cb)
         else:
+            self._slideview.stop()
             self._notebook.set_current_page(0)
             if self._key_press_signal_id is not None:
                 self.disconnect(self._key_press_signal_id)
         self.globes_manager.set_buttons_sensitive(not widget.get_active())
-        textbutton.set_sensitive(not widget.get_active())
+        self._text_button.set_sensitive(not widget.get_active())
 
 
 DEF_SPACING = 6
